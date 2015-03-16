@@ -357,4 +357,4 @@ def CopyOriginal(file, sMyLang):
 		shutil.copyfile(file, sTarget)
 		return sTarget
 	else:
-		return 'null'
+		return file
