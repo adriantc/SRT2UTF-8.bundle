@@ -11,7 +11,7 @@
 #
 
 ######################################### Global Variables #########################################
-PLUGIN_VERSION = '0.0.2.0'
+PLUGIN_VERSION = '0.0.2.1'
 
 ######################################### Imports ##################################################
 import os
@@ -106,6 +106,7 @@ def FixFile(sFile, sMyLang):
 		if sModel != 'und':
 			Log.Debug('Chared is supported for this language')
 			sMyEnc = FindEncChared(sFile, sModel)
+		Log.Debug('Trying to fix file for language "%s"' %(sModel))
 	except:
 		Log.Debug('Chared is not supported, reverting to Beautifull Soap')
 		sMyEnc = FindEncBS(sFile, sMyLang)
@@ -114,6 +115,7 @@ def FixFile(sFile, sMyLang):
 		# Make a backup
 		try:
 			MakeBackup(sFile)
+			sFile = CopyOriginal(sFile, sMyLang)
 		except:
 			Log.Exception('Something went wrong creating a backup, file will not be converted!!! Check file permissions?')
 		else:
@@ -345,3 +347,14 @@ def RevertBackup(file):
 	else:
 		Log.Critical('**** Something went wrong here, but backup has been disabled....SIGH.....Your fault, not mine!!!!! ****')			
 
+######################################## Copy the original file to a language appended one ###############################
+def CopyOriginal(file, sMyLang):
+	if not Prefs['Overwrite_Original']:
+		iCounter = 1
+		fileName, fileExtension = os.path.splitext(file)
+		sTarget = fileName + '.' + sMyLang + fileExtension
+		Log.Debug('Making a copy of the original file %s as %s' %(file, sTarget))
+		shutil.copyfile(file, sTarget)
+		return sTarget
+	else:
+		return 'null'

@@ -3,7 +3,13 @@
 		"id": "Make_Backup",
 		"label": "Create backup",
 		"type": "bool",
-		"default": "true"
+		"default": "false"
+	},
+	{
+		"id": "Overwrite_Original",
+		"label": "Overwrite original file (create backup can be disabled)",
+		"type": "bool",
+		"default": "false"
 	},
 	{
 		"id": "OSEnabled",
