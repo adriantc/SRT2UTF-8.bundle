@@ -1,5 +1,8 @@
+v0.0.2.1
+- Added option to create a new file for the converted text as: originalFilename.languageCode.subtitleExtension
+
 v0.0.2.0
--	Added support for OpenSubtitles Agent
+- Added support for OpenSubtitles Agent
 	(Do make sure, that this plug-in is the latest in the agent order)
 
 v0.0.1.9

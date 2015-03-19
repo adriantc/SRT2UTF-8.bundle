@@ -1,15 +1,10 @@
 [
 	{
-		"id": "Make_Backup",
-		"label": "Create backup",
-		"type": "bool",
-		"default": "false"
-	},
-	{
-		"id": "Overwrite_Original",
-		"label": "Overwrite original file (create backup can be disabled)",
-		"type": "bool",
-		"default": "false"
+		"id": "ConversionResult",
+		"label": "Conversion result",
+		"type": "enum",
+		"values": ["Create a new file as originalFilename.languageCode.subtitleExtension", "Overwrite original file, but make a backup", "Overwrite original file, but DON'T make a backup"],
+		"default": "Overwrite original file, but make a backup",
 	},
 	{
 		"id": "OSEnabled",

@@ -106,7 +106,6 @@ def FixFile(sFile, sMyLang):
 		if sModel != 'und':
 			Log.Debug('Chared is supported for this language')
 			sMyEnc = FindEncChared(sFile, sModel)
-		Log.Debug('Trying to fix file for language "%s"' %(sModel))
 	except:
 		Log.Debug('Chared is not supported, reverting to Beautifull Soap')
 		sMyEnc = FindEncBS(sFile, sMyLang)
@@ -307,7 +306,7 @@ def sIsValid(sMyDir, sMediaFilename, sSubtitleFilename):
 
 ######################################## Make the backup, if enabled ###############################
 def MakeBackup(file):
-	if Prefs['Make_Backup']:
+	if Prefs['ConversionResult'] == 'Overwrite original file, but make a backup':
 		iCounter = 1
 		sTarget = file + '.' + 'Srt2Utf-8'
 		# Make sure we don't override an already existing backup
@@ -323,7 +322,7 @@ def ValidatePrefs():
 
 ######################################## Revert the backup, if enabled #############################
 def RevertBackup(file):
-	if Prefs['Make_Backup']:
+	if Prefs['ConversionResult'] == 'Overwrite original file, but make a backup':
 		Log.Critical('**** Reverting from backup, something went wrong here ****')	
 		# Look back of a maximum of 250 backup's
 		iCounter = 250
@@ -349,11 +348,11 @@ def RevertBackup(file):
 
 ######################################## Copy the original file to a language appended one ###############################
 def CopyOriginal(file, sMyLang):
-	if not Prefs['Overwrite_Original']:
+	if Prefs['ConversionResult'] == 'Create a new file as originalFilename.languageCode.subtitleExtension':
 		iCounter = 1
 		fileName, fileExtension = os.path.splitext(file)
 		sTarget = fileName + '.' + sMyLang + fileExtension
-		Log.Debug('Making a copy of the original file %s as %s' %(file, sTarget))
+		Log.Debug('Making a copy of the original file as %s' %(sTarget))
 		shutil.copyfile(file, sTarget)
 		return sTarget
 	else:
