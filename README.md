@@ -1,13 +1,15 @@
 # UTF-8 Subtitles Converter
 
 This project is a highly configurable [Plex Media Server](https://plex.tv/) plug-in (based on SRT2UTF-8) for converting subtitles to the more Plex friendly UTF-8 encoding.
-<br/>
+
 Plex has a hard time displaying diacritics and other special characters when the subtitles are not UTF-8 encoded. This plug-in resolves this issues by automatically converting all the scanned subtitle files to UTF-8 encoding, which are fully supported by Plex.
+
+[Current stable version: 1.0.0 (Build 1)](https://github.com/adriantc/UTF-8SubtitlesConverter.bundle/releases/latest)
 
 ## Installation
 
-Download the latest release and extract all its content (the folder UTF-8SubtitlesConverter.bundle) to [Plex Plug-in folder](https://support.plex.tv/hc/en-us/articles/201106098-How-do-I-find-the-Plug-Ins-folder-).
-<br/>
+Download the [UTF-8SubtitlesConverter.bundle.zip from the latest release](https://github.com/adriantc/UTF-8SubtitlesConverter.bundle/releases/latest) and extract all its content (the folder UTF-8SubtitlesConverter.bundle) to [Plex Plug-in folder](https://support.plex.tv/hc/en-us/articles/201106098-How-do-I-find-the-Plug-Ins-folder-).
+
 *In order to avoid having to refresh the libraries after conversions make sure the UTF-8 Subtitles Converter is the first in the order of priority. That is needed in order to force conversion and then scanning for metadata. That is important when you choose to create a new subtitles file and not update the old one.*
 
 ## Usage
@@ -29,5 +31,5 @@ All the credits (and more) must go to [Tommy Mikkelsen](https://github.com/ukdto
 ## License
 
 This program is free software: you can redistribute it and/or modify it under the terms of the [GNU General Public License](http://www.gnu.org/licenses/) as published by the Free Software Foundation, either version 3 of the License, or any later version.
-<br/>
+
 This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the [GNU General Public License](http://www.gnu.org/licenses/) for more details.
