@@ -18,7 +18,7 @@ Please feel free to fork this project and implement whatever you want (in fact t
 
 ## Change log
 
-Read the [change log](/blob/master/Release files/Change log.txt) for a full list of changes.
+Read the [change log](/Release files/Change log.txt) for a full list of changes.
 
 ## Credits
 
