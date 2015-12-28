@@ -1,0 +1,3 @@
++ v1.0.0 (Build 1) - STABLE BUILD
+	[Based on SRT2UTF-8.bundle v0.0.2.0]
+	- Added option to create a new file for the converted text as: originalFilename.languageCode.subtitleExtension

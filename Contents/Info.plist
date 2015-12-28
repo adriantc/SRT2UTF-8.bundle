@@ -3,11 +3,19 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleIdentifier</key>
-	<string>com.plexapp.agents.srt2utf8</string>
+	<string>com.plexapp.agents.utf8subtitlesconverter</string>
 	<key>PlexAgentAttributionText</key>
 	<string>
-		The main purpose of the &lt;a href=&quot;http://forums.plex.tv/index.php/topic/94864-rel-str2utf-8/&quot;&gt;srt2utf-8&lt;/a&gt; agent is to make sure, &lt;br/&gt;
-		that all not embedded subtitle files are encoded as UTF-8.&lt;br/&gt; For the manual, please look &lt;a href=&quot;https://github.com/ukdtom/SRT2UTF-8.bundle/wiki/&quot;&gt;here&lt;/a&gt;	</string>
+		UTF-8 Subtitles Converter is a highly configurable Plex Media Server plug-in (based on &lt;a href=&quot;https://github.com/ukdtom/SRT2UTF-8.bundle&quot; target=&quot;_blank&quot; &gt;SRT2UTF-8&lt;/a&gt;) for converting subtitles to the more Plex friendly UTF-8 encoding.
+		&lt;br/&gt;&lt;br/&gt;
+		For the manual, please visit the &lt;a href=&quot;https://github.com/adriantc/UTF-8SubtitlesConverter.bundle/wiki&quot; target=&quot;_blank&quot; &gt;Wiki&lt;/a&gt; page on GitHub.
+		&lt;br/&gt;&lt;br/&gt;
+		&lt;b&gt;Version: 1.0.0 (Build 1) - 28.12.2015
+		&lt;br/&gt;
+		Developer: &lt;a href=&quot;https://github.com/adriantc&quot; target=&quot;_blank&quot; &gt;Adrian-Costin Tundrea&lt;/a&gt; (based on previous work by &lt;a href=&quot;https://github.com/ukdtom&quot; target=&quot;_blank&quot; &gt;Tommy Mikkelsen&lt;/a&gt;)&lt;/b&gt;
+		&lt;br/&gt;&lt;br/&gt;
+		For more free or open-source software please visit my little &lt;a href=&quot;http://softwareshack.org/&quot; target=&quot;_blank&quot; &gt;Software Shack&lt;/a&gt;. Enjoy!
+	</string>
 	<key>PlexFrameworkVersion</key>
 	<string>2</string>
 	<key>PlexPluginClass</key>

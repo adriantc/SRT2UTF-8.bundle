@@ -11,7 +11,9 @@
 #
 
 ######################################### Global Variables #########################################
-PLUGIN_VERSION = '0.0.2.1'
+PLUGIN_NAME = 'UTF-8 Subtitles Converter'
+PLUGIN_CODE = 'UTF-8SubtitlesConverter'
+PLUGIN_VERSION = '1.0.0.1'
 
 ######################################### Imports ##################################################
 import os
@@ -30,13 +32,13 @@ from chared.detector import list_models, get_model_path, EncodingDetector
 
 ######################################## Start of plugin ###########################################
 def Start():
-	Log.Info(L('Starting') + ' %s ' %(L('Srt2Utf-8')) + L('with a version of') + ' %s on %s' %(PLUGIN_VERSION, Platform.OS))
-#	print L('Starting') + ' %s ' %(L('Srt2Utf-8')) + L('with a version of') + ' %s' %(PLUGIN_VERSION)
+	Log.Info(L('Starting') + ' %s ' %(PLUGIN_NAME) + L('with a version of') + ' %s on %s' %(PLUGIN_VERSION, Platform.OS))
+#	print L('Starting') + ' %s ' %(PLUGIN_NAME) + L('with a version of') + ' %s' %(PLUGIN_VERSION)
 #	print("********  Started on %s  **********" %(Platform.OS))
 	
 ####################################### Movies Plug-In #############################################
 class srt2utf8AgentMovies(Agent.Movies):
-	name = L('Srt2Utf-8') + ' (Movies)'
+	name = PLUGIN_NAME + ' (Movies)'
 	languages = [Locale.Language.NoLanguage]
 	primary_provider = False
 	contributes_to = ['com.plexapp.agents.imdb', 'com.plexapp.agents.themoviedb', 'com.plexapp.agents.none']
@@ -54,7 +56,7 @@ class srt2utf8AgentMovies(Agent.Movies):
 
 ####################################### TV-Shows Plug-In ###########################################
 class srt2utf8AgentTV(Agent.TV_Shows):
-	name = L('Srt2Utf-8') + ' (TV)'
+	name = PLUGIN_NAME + ' (TV)'
 	languages = [Locale.Language.NoLanguage]
 	primary_provider = False
 	contributes_to = ['com.plexapp.agents.thetvdb', 'com.plexapp.agents.none']
@@ -88,7 +90,7 @@ def GetOSSrt(part):
 						# Get the ext of the SubtitleFile
 						sFileName, sFileExtension = os.path.splitext(sSrtName)
 						# Is this a backup file?
-						if sFileExtension != '.Srt2Utf-8':
+						if sFileExtension != '.' + PLUGIN_CODE:
 							# Nope, so go ahead
 							Log.Debug('Checking file: %s' %(sMySrtFile))
 							if not bIsUTF_8(sMySrtFile):
@@ -308,10 +310,10 @@ def sIsValid(sMyDir, sMediaFilename, sSubtitleFilename):
 def MakeBackup(file):
 	if Prefs['ConversionResult'] == 'Overwrite original file, but make a backup':
 		iCounter = 1
-		sTarget = file + '.' + 'Srt2Utf-8'
+		sTarget = file + '.' + PLUGIN_CODE
 		# Make sure we don't override an already existing backup
 		while os.path.isfile(sTarget):
-			sTarget = file + '.' + str(iCounter) + '.Srt2Utf-8'
+			sTarget = file + '.' + str(iCounter) + '.' + PLUGIN_CODE
 			iCounter = iCounter + 1
 		Log.Debug('Making a backup of %s as %s' %(file, sTarget))
 		shutil.copyfile(file, sTarget)
@@ -326,13 +328,13 @@ def RevertBackup(file):
 		Log.Critical('**** Reverting from backup, something went wrong here ****')	
 		# Look back of a maximum of 250 backup's
 		iCounter = 250
-		sTarget = file + '.' + str(iCounter) + '.' + 'Srt2Utf-8'
+		sTarget = file + '.' + str(iCounter) + '.' + PLUGIN_CODE
 		# Make sure we don't override an already existing backup
 		while not os.path.isfile(sTarget):
 			if iCounter == 0:
-				sTarget = file + '.' + 'Srt2Utf-8'
+				sTarget = file + '.' + PLUGIN_CODE
 			else:				
-				sTarget = file + '.' + str(iCounter) + '.' + 'Srt2Utf-8'
+				sTarget = file + '.' + str(iCounter) + '.' + PLUGIN_CODE
 			iCounter = iCounter -1
 		Log.Debug('Reverting from backup of %s' %(sTarget))
 		shutil.copyfile(sTarget, file)
