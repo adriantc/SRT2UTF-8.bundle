@@ -135,6 +135,7 @@ cpISO = {
 	"os" : "Unknown",
 	"pa" : "Unknown",
 	"pb" : "iso-8859-1",
+	"pt-BR": "iso-8859-1",
 	"pi" : "Unknown",
 	"pl" : "iso-8859-2",
 	"ps" : "Unknown",
@@ -192,6 +193,7 @@ cpISO = {
 	"za" : "Unknown",
 	"zh" : "Unknown",
 	"zu" : "Unknown",
+	"xx" : "Unknown",
 	"aar" : "Unknown",
 	"abk" : "Unknown",
 	"ace" : "Unknown",
@@ -695,6 +697,7 @@ cpISO = {
 	"zun" : "Unknown",
 	"zza" : "Unknown",
 	"zxx" : "Unknown",
+	"xxx" : "Unknown"
 }
 
 cpWindows = {
@@ -825,6 +828,7 @@ cpWindows = {
 	"os" : "Unknown",
 	"pa" : "Unknown",
 	"pb" : "windows-1252",
+	"pt-BR": "windows-1252",
 	"pi" : "Unknown",
 	"pl" : "Unknown",
 	"ps" : "Unknown",
@@ -883,6 +887,7 @@ cpWindows = {
 	"za" : "Unknown",
 	"zh" : "Unknown",
 	"zu" : "Unknown",
+	"xx" : "Unknown",
 	"aar" : "Unknown",
 	"abk" : "Unknown",
 	"ace" : "Unknown",
@@ -1386,5 +1391,6 @@ cpWindows = {
 	"zun" : "Unknown",
 	"zza" : "Unknown",
 	"zxx" : "Unknown",
+	"xxx" : "Unknown"
 }
 

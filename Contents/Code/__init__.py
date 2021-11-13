@@ -13,7 +13,7 @@
 ######################################### Global Variables #########################################
 PLUGIN_NAME = 'UTF-8 Subtitles Converter'
 PLUGIN_CODE = 'UTF-8SubtitlesConverter'
-PLUGIN_VERSION = '1.0.0.1'
+PLUGIN_VERSION = '1.1.0.2'
 
 ######################################### Imports ##################################################
 import os
@@ -35,13 +35,13 @@ def Start():
 	Log.Info(L('Starting') + ' %s ' %(PLUGIN_NAME) + L('with a version of') + ' %s on %s' %(PLUGIN_VERSION, Platform.OS))
 #	print L('Starting') + ' %s ' %(PLUGIN_NAME) + L('with a version of') + ' %s' %(PLUGIN_VERSION)
 #	print("********  Started on %s  **********" %(Platform.OS))
-	
+
 ####################################### Movies Plug-In #############################################
 class srt2utf8AgentMovies(Agent.Movies):
 	name = PLUGIN_NAME + ' (Movies)'
 	languages = [Locale.Language.NoLanguage]
 	primary_provider = False
-	contributes_to = ['com.plexapp.agents.imdb', 'com.plexapp.agents.themoviedb', 'com.plexapp.agents.none']
+	contributes_to = ['com.plexapp.agents.imdb', 'com.plexapp.agents.themoviedb']
 	# Return a dummy object to satisfy the framework
 	def search(self, results, media, lang, manual):
 		results.Append(MetadataSearchResult(id='null', score = 100))
@@ -59,7 +59,7 @@ class srt2utf8AgentTV(Agent.TV_Shows):
 	name = PLUGIN_NAME + ' (TV)'
 	languages = [Locale.Language.NoLanguage]
 	primary_provider = False
-	contributes_to = ['com.plexapp.agents.thetvdb', 'com.plexapp.agents.none']
+	contributes_to = ['com.plexapp.agents.thetvdb', 'com.plexapp.agents.themoviedb']
 	# Return a dummy object to satisfy the framework
 	def search(self, results, media, lang):
 		results.Append(MetadataSearchResult(id='null', score = 100))
@@ -82,7 +82,7 @@ def GetOSSrt(part):
 		OSDir = os.path.join(Core.app_support_path, 'Media', 'localhost', sHash[0], sHash[1:]+ '.bundle', 'Contents', 'Subtitle Contributions', 'com.plexapp.agents.opensubtitles')
 		for root, dirs, files in os.walk(OSDir, topdown=True):
 			for langCode in dirs:
-				for root2, dirs2, files2 in os.walk(os.path.join(OSDir,langCode), topdown=False):			
+				for root2, dirs2, files2 in os.walk(os.path.join(OSDir,langCode), topdown=False):
 					# Walk the directory
 					for sSrtName in files2:
 						sMySrtFile = os.path.join(OSDir, langCode ,sSrtName)
@@ -97,7 +97,7 @@ def GetOSSrt(part):
 								Log.Debug('****** File is not UTF-8...Need to fix it *******')
 								FixFile(sMySrtFile, langCode)
 							else:
-								Log.Debug('File is okay')			
+								Log.Debug('File is okay')
 
 
 ######################################### Fix the file ###################################
@@ -133,7 +133,7 @@ def FixFile(sFile, sMyLang):
 
 ######################################### Get files in directory ###################################
 def GetFiles(part):
-	# Filename of media	
+	# Filename of media
 	sFile = part.file.decode('utf-8')
 	# Directory where it's located
 	sMyDir = os.path.dirname(sFile).decode('utf-8')
@@ -148,11 +148,11 @@ def GetFiles(part):
 				# We got a valid subtitle file here
 				if not bIsUTF_8(sTest):
 					# Got a language code in the file-name?
-					sMyLang = sGetFileLang(sTest)			
+					sMyLang = sGetFileLang(sTest)
 					if sMyLang == 'xx':
 						sMyLang = GetUsrEncPref()
 						sMyLang = Locale.Language.Match(sMyLang)
-					FixFile(sTest, sMyLang)					
+					FixFile(sTest, sMyLang)
 
 #ged took out code here, and moved to a function
 
@@ -279,7 +279,7 @@ def bIsUTF_8(sMyFile):
 def sIsValid(sMyDir, sMediaFilename, sSubtitleFilename):
 	try:
 		Log.Debug('Checking if file %s is valid' %(sSubtitleFilename))
-		# Valid list of subtitle ext.	
+		# Valid list of subtitle ext.
 		lValidList = Prefs['Valid_Ext'].upper().split()
 		# Get the ext of the SubtitleFile
 		sFileName, sFileExtension = os.path.splitext(sSubtitleFilename)
@@ -290,11 +290,11 @@ def sIsValid(sMyDir, sMediaFilename, sSubtitleFilename):
 			myMedia, myMediaExt = os.path.splitext(os.path.basename(sMediaFilename))
 			# Get the ext of the SubtitleFile
 			sSRTName2, sFileExtension = os.path.splitext(sFileName)
-			if sFileName == myMedia:
+			if (Prefs['IgnoreCaseWhenMatchingMediaSubtitles'] and sFileName.lower() == myMedia.lower()) or (not Prefs['IgnoreCaseWhenMatchingMediaSubtitles'] and sFileName == myMedia):
 				Log.Debug('Found a valid subtitle file named "%s"' %(sSubtitleFilename))
 				sSource = sMyDir + '/' + sSubtitleFilename
 				return sSource
-			elif myMedia == sSRTName2:
+			elif (Prefs['IgnoreCaseWhenMatchingMediaSubtitles'] and myMedia.lower() == sSRTName2.lower()) or (not Prefs['IgnoreCaseWhenMatchingMediaSubtitles'] and myMedia == sSRTName2):
 				Log.Debug('Found a valid subtitle file named "%s"' %(sSubtitleFilename))
 				sSource = sMyDir + '/' + sSubtitleFilename
 				return sSource
@@ -325,7 +325,7 @@ def ValidatePrefs():
 ######################################## Revert the backup, if enabled #############################
 def RevertBackup(file):
 	if Prefs['ConversionResult'] == 'Overwrite original file, but make a backup':
-		Log.Critical('**** Reverting from backup, something went wrong here ****')	
+		Log.Critical('**** Reverting from backup, something went wrong here ****')
 		# Look back of a maximum of 250 backup's
 		iCounter = 250
 		sTarget = file + '.' + str(iCounter) + '.' + PLUGIN_CODE
@@ -333,7 +333,7 @@ def RevertBackup(file):
 		while not os.path.isfile(sTarget):
 			if iCounter == 0:
 				sTarget = file + '.' + PLUGIN_CODE
-			else:				
+			else:
 				sTarget = file + '.' + str(iCounter) + '.' + PLUGIN_CODE
 			iCounter = iCounter -1
 		Log.Debug('Reverting from backup of %s' %(sTarget))
@@ -344,9 +344,9 @@ def RevertBackup(file):
 		# Remove unneeded backup
 		if os.path.isfile(sTarget):
 			os.remove(sTarget)
-		
+
 	else:
-		Log.Critical('**** Something went wrong here, but backup has been disabled....SIGH.....Your fault, not mine!!!!! ****')			
+		Log.Critical('**** Something went wrong here, but backup has been disabled....SIGH.....Your fault, not mine!!!!! ****')
 
 ######################################## Copy the original file to a language appended one ###############################
 def CopyOriginal(file, sMyLang):
