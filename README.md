@@ -1,8 +1,7 @@
 # UTF-8 Subtitles Converter
 
 [![GitHub issues](https://img.shields.io/github/issues/adriantc/UTF-8SubtitlesConverter.bundle.svg?style=flat)](https://github.com/ukdtom/SRT2UTF-8.bundle/issues)
-[![master](https://img.shields.io/badge/master-stable-green.svg?maxAge=2592000)]()
-![Maintenance](https://img.shields.io/badge/Maintained-Yes-green.svg)
+![Maintenance](https://img.shields.io/maintenance/yes/2021)
 
 This project is a highly configurable [Plex Media Server](https://plex.tv/) plug-in (based on SRT2UTF-8) for converting subtitles to the more Plex friendly UTF-8 encoding.
 
